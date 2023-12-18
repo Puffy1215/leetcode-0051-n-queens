@@ -10,9 +10,15 @@ def _check_preconditions(n: int) -> bool:
     return N_MIN <= n <= N_MAX
 
 
-def n_queens(n: int) -> Iterator[list[list[str]]]:
+def _recursive_n_queens(board: list[str]) -> Iterator[list[str]]:
+    pass
+
+
+def n_queens(n: int) -> Iterator[list[str]]:
     """Solves problem N-Queens"""
 
     assert _check_preconditions(n)
 
-    pass
+    board = ["." * n] * n
+    for i in range(n):
+        pass
