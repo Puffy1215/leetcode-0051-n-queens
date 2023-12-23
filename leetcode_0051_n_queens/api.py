@@ -1,5 +1,6 @@
 """API for solving problem N-Queens"""
 
+from copy import deepcopy
 from typing import Iterator
 
 N_MAX = 9
@@ -24,19 +25,31 @@ def _set_queen(board: list[list[str]], x: int, y: int) -> None:
     for i in range(n):
         board[y][i] = BAD
         board[i][x] = BAD
-        board[min(x+i,n)][min(y+i,n)] = BAD
-        board[max(x-i,0)][max(y-i,0)] = BAD
-        board[min(x+i,n)][max(y-i,0)] = BAD
-        board[max(x-i,0)][min(y+i,n)] = BAD
+        board[min(x + i, n)][min(y + i, n)] = BAD
+        board[max(x - i, 0)][max(y - i, 0)] = BAD
+        board[min(x + i, n)][max(y - i, 0)] = BAD
+        board[max(x - i, 0)][min(y + i, n)] = BAD
 
     board[y][x] = QUEEN
 
 
-def n_queens(n: int) -> Iterator[list[str]]:
+def _recursive_n_queens(board: list[list[str]], y: int) -> Iterator[list[list[str]]]:
+    n = len(board)
+
+    for x in range(n):
+        if board[y][x] == GOOD:
+            copy = deepcopy(board)
+            _set_queen(copy, x, y)
+            if y == n - 1:
+                yield copy
+            else:
+                for b in _recursive_n_queens(copy, y + 1):
+                    yield b
+
+
+def n_queens(n: int) -> Iterator[list[list[str]]]:
     """Solves problem N-Queens"""
 
     assert _check_preconditions(n)
 
-    board = ["." * n] * n
-    for i in range(n):
-        pass
+    pass
