@@ -38,6 +38,8 @@ _BOARDS_1 = [
     ["result", "n"],
     (
         [[_to_list(b) for b in _BOARDS_4], 4],
+        [[], 3],
+        [[], 2],
         [[_to_list(b) for b in _BOARDS_1], 1],
     ),
 )
