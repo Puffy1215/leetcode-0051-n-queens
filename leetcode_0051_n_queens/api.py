@@ -16,6 +16,11 @@ BAD = "."
 QUEEN = "Q"
 
 
+def _set_bad(board: list[list[str]], x: int, y: int) -> None:
+    if board[y][x] != QUEEN:
+        board[y][x] = BAD
+
+
 def _set_queen(board: list[list[str]], x: int, y: int) -> None:
     n = len(board)
     assert 0 <= x < n
