@@ -27,15 +27,25 @@ def _set_queen(board: list[list[str]], x: int, y: int) -> None:
     assert 0 <= y < n
     assert board[y][x] == GOOD
 
-    for i in range(n):
-        board[y][i] = BAD
-        board[i][x] = BAD
-        board[min(x + i, n)][min(y + i, n)] = BAD
-        board[max(x - i, 0)][max(y - i, 0)] = BAD
-        board[min(x + i, n)][max(y - i, 0)] = BAD
-        board[max(x - i, 0)][min(y + i, n)] = BAD
-
     board[y][x] = QUEEN
+
+    for i in range(1, n):
+        if y + i < n:
+            _set_bad(board, x, y + i)
+        if y - i >= 0:
+            _set_bad(board, x, y - i)
+        if x + i < n:
+            _set_bad(board, x + i, y)
+            if y + i < n:
+                _set_bad(board, x + i, y + i)
+            if y - i >= 0:
+                _set_bad(board, x + i, y - i)
+        if x - i >= 0:
+            _set_bad(board, x - i, y)
+            if y + i < n:
+                _set_bad(board, x - i, y + i)
+            if y - i >= 0:
+                _set_bad(board, x - i, y - i)
 
 
 def _recursive_n_queens(board: list[list[str]], y: int) -> Iterator[list[list[str]]]:
