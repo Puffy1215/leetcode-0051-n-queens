@@ -67,6 +67,7 @@ def n_queens(n: int) -> Iterator[list[list[str]]]:
 
     assert _check_preconditions(n)
 
-    board = [[GOOD] * n] * n
+    board = [[GOOD] * n for _ in range(n)]
+
     for b in _recursive_n_queens(board, 0):
         yield b
