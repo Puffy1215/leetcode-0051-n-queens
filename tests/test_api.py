@@ -47,3 +47,19 @@ def test_n_queens(result: list[list[list[str]]], n: int) -> None:
     """Tests solution for problem N-Queens"""
 
     assert list(api.n_queens(n)) == result
+
+
+@pytest.mark.parametrize(
+    ["result", "n"],
+    (
+        [10, 5],
+        [4, 6],
+        [40, 7],
+        [92, 8],
+        [352, 9],
+    ),
+)
+def test_n_queens_count(result: int, n: int) -> None:
+    """Tests solution for problem N-Queens"""
+
+    assert len(list(api.n_queens(n))) == result
